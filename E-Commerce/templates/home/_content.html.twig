@@ -1,0 +1,72 @@
+
+
+
+    <section class="main-content">
+    <div class="row">
+        <div class="span12">
+            <div class="row">
+                <div class="span12">
+                    <h4 class="title">
+                        <span class="pull-left"><span class="text"><span class="line">YENİ <strong>ÜRÜNLER</strong></span></span></span>
+                        <span class="pull-right">
+										<a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
+									</span>
+                    </h4>
+                    <div id="myCarousel" class="myCarousel carousel slide">
+                        <div class="carousel-inner">
+                            <div class="active item">
+                                <ul class="thumbnails">
+                                    {% for rs in lastproducts %}
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <span class="sale_tag"></span>
+                                                <a href="{{ path('product_detail', {'id': rs.id}) }}"><img alt="" src="{{ asset('uploads') }}/images/{{ rs.image }}"></a><br>
+                                                <a href="" class="title">{{ rs.title }}</a><br>
+                                                <a href="#" class="category"></a>
+                                                <p class="price">{{ rs.sprice }} ₺</p>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <div class="row feature_box">
+                <div class="span4">
+                    <div class="service">
+                        <div class="responsive">
+                            <img src="assets/images/feature_img_2.png" alt="" />
+                            <h4>%100  <strong>Müşteri Memnuniyeti</strong></h4>
+                            <p>En iyi ürünler, en uygun fiyatlarla siz değerli müşterilerimize sunulmaktadır.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="service">
+                        <div class="customize">
+                            <img src="assets/images/feature_img_1.png" alt="" />
+                            <h4>Güvenli <strong>Alışveriş</strong></h4>
+                            <p>Dilediğiniz her yerden güvenli alışverişin tadını çıkarın.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4">
+                    <div class="service">
+                        <div class="support">
+                            <img src="assets/images/feature_img_3.png" alt="" />
+                            <h4>7/24 Canlı <strong>Destek</strong></h4>
+                            <p>Kesintisiz 7/24 Canlı Destek Hizmeti.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

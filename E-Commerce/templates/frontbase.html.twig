@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}  Elektronik AVM {% endblock %}</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<title>{% block description %} deneme description {% endblock %}</title>">
+    <meta name="keywords" content=" <title>{% block keywords %}  deneme keywords {% endblock %}</title>">
+    <!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+    <!-- bootstrap -->
+    <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <link href="{{ asset('assets') }}/css/bootstrappage.css" rel="stylesheet"/>
+
+    <!-- global styles -->
+    <link href="{{ asset('assets') }}/css/flexslider.css" rel="stylesheet"/>
+    <link href="{{ asset('assets') }}/css/main.css" rel="stylesheet"/>
+
+    <!-- scripts -->
+    <script src="{{ asset('assets') }}/js/jquery-1.7.2.min.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets') }}/js/superfish.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.scrolltotop.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="{{ asset('assets') }}/js/respond.min.js"></script>
+    <![endif]-->
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+<style>
+    ul#menu-v, #menu-v ul
+    {
+        width:200px; /* Main Menu width */
+        border:1px solid #CCCCCC;
+        list-style:none; margin:0; padding:0;
+        z-index:9;
+    }
+
+    #menu-v li
+    {
+        margin:0;padding:0;
+        position:relative;
+        background-color:#EEEEEE; /*fallback color*/
+        background-color:rgba(255,255,255,0.8);
+        transition:background 0.5s;
+    }
+    #menu-v li:hover
+    {
+        background-color:rgba(255,255,255,0.5);
+    }
+
+    #menu-v a
+    {
+        font:normal 12px Arial;
+        border-top:1px solid #CCCCCC;
+        display:block;
+        color:#444444;
+        text-decoration:none;
+        line-height:26px;
+        padding-left:22px;
+        position:relative;
+    }
+
+    #menu-v li:first-child a
+    {
+        border-top:0;
+    }
+    #menu-v a:hover {
+        background-color: #2c618f;
+        color: white;
+    }
+    #menu-v a.arrow::after{
+        content:'';
+        position:absolute;
+        display:inline;
+        top:50%;
+        margin-top:-4px;
+        right:8px;
+        border-width:4px;
+        border-style:solid;
+        border-color:transparent transparent transparent white;
+        transition:border-color 0.5s;
+    }
+
+    #menu-v li a.arrow:hover::after
+    {
+        border-color:transparent transparent transparent #CCCCCC;
+    }
+
+    /*Sub level menu items
+    ---------------------------------------*/
+    #menu-v li ul
+    {
+        min-width:180px; /* Sub level menu min width */
+        position:absolute;
+        display:none;
+        left:100%;
+        top:0;
+    }
+
+    #menu-v li:hover > ul
+    {
+        display:block;
+    }
+</style>
+<div id="top-bar" class="container">
+    <div class="row">
+        <div class="span4">
+            <form method="POST" class="search_form">
+                <input type="text" class="input-block-level search-query" Placeholder="eg. T-sirt">
+            </form>
+        </div>
+        <div class="span8">
+            <div class="account pull-right">
+
+
+                <script src="{{ asset('assets') }}/js/common.js"></script>
+
+                        <nav id="menu" class="pull-right">
+                            <ul><li>{{ include('messages.html.twig') }}</li>
+                                <li>{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <a href="">{{ app.user.name }}</a>
+                                    {% else %}
+                                    <a href="">Giriş Yap</a>
+                                    {% endif %}
+                                    <ul>
+                                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                            <li><a href="{{ path('userpanel') }}">Bilgilerim</a></li>
+                                            <li><a href="{{ path('userpanel_edit') }}">Bilgilerimi Güncelle</a></li>
+                                            <li><a href="{{ path('orders_index') }}">Siparişlerim</a></li>
+                                            <li><a href="{{ path('shopcart_index') }}">Sepetim</a></li>
+                                            <li><a href="{{ path('app_logout') }}">Çıkış Yap</a></li>
+                                        {% else %}
+                                            <li><a href="{{ path('app_login') }}">Giriş Yap</a></li>
+                                            <li><a href="{{ path('new_user') }}">Üye Ol</a></li>
+
+                                        {% endif %}
+
+                                    </ul>
+                                </li>
+
+
+
+                            </ul>
+
+                        </nav>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="wrapper" class="container">
+    <section class="navbar main-menu">
+        <div class="navbar-inner main-menu">
+            <a href="{{ path('home') }}" class="logo pull-left"><img src="assets/images/logo.png" class="site_logo" alt=""></a>
+            <nav id="menu" class="pull-right">
+                <ul>{% if cats is defined %}
+                    <li><a href=""> ÜRÜNLER </a>
+                        {% for cat in cats %}
+                            {{ cat|raw }}
+                        {% endfor %}
+                  {% endif %}
+
+
+                    </li>
+                    <li> </li>
+                    <li><a href="{{ path('home') }}">Anasayfa</a></li>
+                    <li><a href="{{ path('hakkimizda') }}">Hakkımızda</a></li>
+                    <li><a href="{{ path('referanslar') }}">Referanslar</a></li>
+                    <li><a href="{{ path('iletisim') }}">İletişim</a></li>
+                    <li><a href="{{ path('admin') }}">Admin Giriş</a></li>
+
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    {% block slider %} {% endblock %}
+    {% block content %} {% endblock %}
+
+    <section id="footer-bar">
+        <div class="row">
+            <div class="span3">
+                <h4>Elektronik AVM</h4>
+                <ul class="nav">
+                    <li><a href="{{ path('home') }}">Anasayfa</a></li>
+                    <li><a href="{{ path('hakkimizda') }}">Hakkımızda</a></li>
+                    <li><a href="{{ path('iletisim') }}">İletişim</a></li>
+                    <li><a href="{{ path('referanslar') }}">Referanslar</a></li>
+                    <li><a href="{{ path('app_login') }}">Giriş Yap</a></li>
+                </ul>
+            </div>
+            <div class="span4">
+                <h4>Hesabım</h4>
+                <ul class="nav">
+                    <li><a href="#">My Account</a></li>
+                    <li><a href="#">Order History</a></li>
+                    <li><a href="#">Wish List</a></li>
+                    <li><a href="#">Newsletter</a></li>
+                </ul>
+            </div>
+            <div class="span5">
+                <p class="logo"><img src="assets/images/logo.png" class="site_logo" alt=""></p>
+                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. the  Lorem Ipsum has been the industry's standard dummy text ever since the you.</p>
+                <br/>
+
+            </div>
+        </div>
+    </section>
+    <section id="copyright">
+        <span>Copyright 2013 bootstrappage template  All right reserved.</span>
+    </section>
+    </div>
+</body>
+</html>

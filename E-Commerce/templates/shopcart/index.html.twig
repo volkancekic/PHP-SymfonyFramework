@@ -1,0 +1,64 @@
+{% extends 'frontbase.html.twig' %}
+
+
+{% block title %} Alışveriş Sepeti {% endblock %}
+
+{% block content %}
+
+
+
+<section class="main-content">
+    <div class="row">
+        <div class="span9">
+    <h4>Alışveriş Sepeti</h4>
+            {{ include('messages.html.twig') }}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Ürün Adı</th>
+                <th>Satış Fiyatı</th>
+                <th>Adet</th>
+                <th>Toplam</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% set total=0 %}
+        {% for shopcart in shopcarts %}
+            <tr>
+                <td>{{ shopcart.id }}</td>
+                <td>{{ shopcart.title }}</td>
+                <td>{{ shopcart.sprice }} ₺</td>
+                <td>{{ shopcart.quantity }} Adet</td>
+                <td>{{ shopcart.quantity * shopcart.sprice }} ₺</td>
+
+                <td class="center"><a href="{{ path('shopcart_del' , {'id':shopcart.id}) }}" onclick="return confirm('Ürün sepetinizden silinsin mi?');" class="btn btn-danger">Listeden Sil</a></td>
+                {% set total = total +( shopcart.quantity * shopcart.sprice ) %}
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">Kayıt Bulunamadı.</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+            <tr> <h5>Toplam Alışveriş Tutarı: {{ total }} ₺</h5></tr>
+            <a href="{{ path('orders_new') }}" class="btn btn-success btn-large">Siparişi Tamamla </a>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="{{ asset('assets') }}/js/common.js"></script>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ürün Düzenle{% endblock %}
+
+{% block body %}
+
+
+
+    {{ include('admin/product/_form.html.twig') }}
+
+
+         <script>
+        ClassicEditor
+            .create( document.querySelector( '#detail' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+         </script>
+
+
+{% endblock %}
+

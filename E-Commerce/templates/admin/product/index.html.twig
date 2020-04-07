@@ -1,0 +1,130 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Ürün Listesi{% endblock %}
+
+{% block content %}
+
+<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+    <div class="row"><div class="col-sm-6">
+            <div class="dataTables_length" id="dataTables-example_length">
+                <label><select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select> records per page</label>
+
+                <a href="{{ path('admin_product_new') }}" class="btn btn-success btn-sm">Yeni Ürün Ekle</a>
+
+            </div>
+
+        </div><div class="col-sm-6">
+            <div id="dataTables-example_filter" class="dataTables_filter">
+                <label>Search:<input type="search" class="form-control input-sm" aria-controls="dataTables-example"></label>
+            </div></div></div><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Amount</th>
+                <th>Price</th>
+                <th>Sprice</th>
+                <th>Min</th>
+                <th>Image</th>
+                <th>Gallery</th>
+                <th>Category_id</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.title }}</td>
+                <td>{{ product.amount }}</td>
+                <td>{{ product.price }}</td>
+                <td>{{ product.sprice }}</td>
+                <td>{{ product.min }}</td>
+                <td> <a href="javascript:openWin('{{ path('admin_product_iedit', {'id': product.id }) }}','','toolbar=no,location=no,directories=0,status=no,top=100,left=200,menuBar=no,scrollBars=no,resizable=no,width=600,height=500');">
+                    {% if product.image==null %}
+                    <img src="{{ url('admin') }}/assets/img/myicon1.png" height="32">
+                    {% else %}
+                        <img src="{{ asset('uploads') }}/images/{{ product.image }}" height="40">
+                    {% endif %}
+                    </a>
+                </td>
+                <td> <a href="javascript:openWin('{{ path('admin_image_new', {'pid': product.id }) }}','','toolbar=no,location=no,directories=0,status=no,top=100,left=200,menuBar=no,scrollBars=no,resizable=no,width=1000,height=800');">
+                    <img src="{{ url('admin') }}/assets/img/gallery.png" height="32">
+                     </a>
+                </td>
+                <td>{{ product.categoryId }}</td>
+                <td>{{ product.status }}</td>
+                <td nowrap >
+                    <a href="{{ path('admin_product_show', {'id': product.id}) }}" class="btn btn-info">Göster</a>
+                    <a href="{{ path('admin_product_edit', {'id': product.id }) }}"  class="btn btn-warning">Düzenle</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="18">Kayıt Bulunamadı.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_product_new') }}">Yeni Oluştur</a>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="dataTables_info" id="dataTables-example_info" role="alert" aria-live="polite" aria-relevant="all">Showing 1 to 10 of 57 entries</div>
+        </div>
+        <div class="col-sm-6">
+            <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+                <ul class="pagination"><li class="paginate_button previous disabled" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous">
+                        <a href="#">Previous</a></li>
+                    <li class="paginate_button active" aria-controls="dataTables-example" tabindex="0">
+                        <a href="#">1</a>
+                    </li>
+                    <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                        <a href="#">2</a>
+                    </li>
+                    <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                        <a href="#">3</a>
+                    </li>
+                    <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                        <a href="#">4</a>
+                    </li>
+                    <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                        <a href="#">5</a>
+                    </li>
+                    <li class="paginate_button " aria-controls="dataTables-example" tabindex="0">
+                        <a href="#">6</a>
+                    </li>
+                    <li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next">
+                        <a href="#">Next</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="admin/assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="admin/assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="admin/assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="admin/assets/js/custom.js"></script>
+
+    </body>
+    </html>
+{% endblock %}
+

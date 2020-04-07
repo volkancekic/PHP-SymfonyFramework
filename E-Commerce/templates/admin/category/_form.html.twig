@@ -1,0 +1,61 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Yeni Kategori Ekle
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-6">
+
+                <form role="form" method="post">
+
+                    <div class="form-group">
+                        <label>Üst Kategori</label>
+                        <select name="category[parentid]" class="form-control">
+
+                            {% if category.parentid!=0 %}
+                                <option value="{{ category.parentid }}">{{ catname.title }}</option>
+                            {% else %}
+                                <option value="0">Ana Kategori</option>
+                            {% endif %}
+
+                            <option value="0">Ana Kategori</option>
+                            {% for cat in catlist %}
+                                <option value="{{ cat.id }}">{{ cat.title }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Kategori Adı</label>
+                        <input type="text" name="category[title]" value="{{ category.title }}" class="form-control"
+                               placeholder="Kategori Adı"/>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Anahtar Kelimeler</label>
+                        <input type="text" name="category[keywords]" value="{{ category.keywords }}"
+                               class="form-control" placeholder="Anahtar Kelimeler"/>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label>Kısa Açıklama</label>
+                        <input type="text" name="category[description]" value="{{ category.description }}"
+                               class="form-control" placeholder="Kısa Açıklama"/>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label>Aktif Durumu</label>
+                        <select name="category[status]" class="form-control">
+                            <option>{{ category.status }}</option>
+                            <option>True</option>
+                            <option>False</option>
+                        </select>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-success btn-lg">Kaydet</button>
+
+
+                </form>
+

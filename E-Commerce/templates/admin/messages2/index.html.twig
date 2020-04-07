@@ -1,0 +1,80 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Üye Mesajları{% endblock %}
+
+{% block content %}
+
+<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+    <div class="row"><div class="col-sm-6">
+            <div class="dataTables_length" id="dataTables-example_length">
+                <label><select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select> records per page</label>
+
+
+            </div>
+
+        </div><div class="col-sm-6">
+            <div id="dataTables-example_filter" class="dataTables_filter">
+                <label>Search:<input type="search" class="form-control input-sm" aria-controls="dataTables-example"></label>
+            </div></div></div><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" aria-describedby="dataTables-example_info">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Message</th>
+                <th>Comment</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for messages2 in messages2s %}
+            <tr>
+                <td>{{ messages2.id }}</td>
+                <td>{{ messages2.name }}</td>
+                <td>{{ messages2.email }}</td>
+                <td>{{ messages2.subject }}</td>
+                <td>{{ messages2.message }}</td>
+                <td>{{ messages2.comment }}</td>
+                <td>{{ messages2.status }}</td>
+                <td>
+                <a href="javascript:openWin('{{ path('admin_messages2_show', {'id': messages2.id}) }}','','toolbar=no,location=no,directories=0,status=no,top=100,left=200,menuBar=no,scrollBars=no,resizable=no,width=600,height=500');">
+
+               Mesajı Oku</a>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Kayıt Bulunamadı.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+
+</div>
+    <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="admin/assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="admin/assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="admin/assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="admin/assets/js/custom.js"></script>
+
+    </body>
+    </html>
+{% endblock %}
+

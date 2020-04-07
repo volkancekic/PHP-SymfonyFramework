@@ -1,0 +1,117 @@
+{% extends 'frontbase.html.twig' %}
+
+
+{% block title %} {{ data[0].title }} {% endblock %}
+{% block keywords %} {{ data[0].keywords }} {% endblock %}
+{% block description %} {{ data[0].description }} {% endblock %}
+{% block content %}
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
+    <!-- bootstrap -->
+    <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="{{ asset('assets') }}/css/bootstrappage.css" rel="stylesheet"/>
+
+    <!-- global styles -->
+    <link href="{{ asset('assets') }}/css/flexslider.css" rel="stylesheet"/>
+    <link href="{{ asset('assets') }}/css/main.css" rel="stylesheet"/>
+    <link href="{{ asset('assets') }}/css/jquery.fancybox.css" rel="stylesheet"/>
+
+    <!-- scripts -->
+    <script src="{{ asset('assets') }}/js/jquery-1.7.2.min.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap.min.js"></script>
+    <script src="{{ asset('assets') }}/js/superfish.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.scrolltotop.js"></script>
+    <script src="{{ asset('assets') }}/js/jquery.fancybox.js"></script>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="{{ asset('assets') }}js/respond.min.js"></script>
+    <![endif]-->
+    </head>
+
+
+    <section class="main-content">
+        <div class="row">
+            <div class="span9">
+                <div class="row"><br><br><br>
+                    <div class="span4">
+
+
+                        <a href="{{ asset('uploads') }}/images/{{ data[0].image }}" class="thumbnail" data-fancybox-group="group1" title=""><img alt="" src="{{ asset('uploads') }}/images/{{ data[0].image }}"></a>
+                        <ul class="thumbnails small">
+                        {% for rs in image %}
+
+                            <li class="span1">
+                                <a href="{{ asset('uploads') }}/images/{{ rs.image }}" class="thumbnail" data-fancybox-group="group1" title=""><img src="{{ asset('uploads') }}/images/{{ rs.image }}" alt=""></a>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="span5">
+                        <address>
+                            <strong>Başlık</strong> <span>{{ data[0].title }}</span><br>
+                            <strong>Stok Sayısı</strong> <span>{{ data[0].amount }}</span><br>
+                            <h5>Ürün Fiyatı</h5>
+                            <h3> {{ data[0].sprice }} ₺</h3><br>
+                        </address>
+
+                    </div>
+                    <div class="span5">
+                        <form class="form-inline" action="{{ path('shopcart_new') }}" method="post">
+                            <p>&nbsp;</p>
+                            <label>Adet:</label>
+                            <input type="number" class="span1" name="shopcart[quantity]" value="1"
+                                   max="{{ data[0].amount }}">
+                            <input type="hidden" name="shopcart[productid]" value="{{ data[0].id }}">
+
+                            <input type="hidden" name="token" value="{{ csrf_token('add-item') }}">
+                            <button class="btn btn-inverse" type="submit">Sepete Ekle</button>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span9"><br>
+                        <ul class="nav nav-tabs" id="myTab">
+                            <li class="active"><a href="#home">Ürün Detayı</a></li>
+                            <li class=""><a href="#profile">#</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="home">{{ data[0].detail|raw }}</div>
+                            <div class="tab-pane" id="profile">
+                                <table class="table table-striped shop_attributes">
+                                    <tbody>
+                                    <tr class="">
+                                        <td></td>
+
+                                    </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </section>
+            <script src="{{ asset('assets') }}/js/common.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $('.thumbnail').fancybox({
+                        openEffect: 'none',
+                        closeEffect: 'none'
+                    });
+                });
+            </script>
+
+
+
+{% endblock %}

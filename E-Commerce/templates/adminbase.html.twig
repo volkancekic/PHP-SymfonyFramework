@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="{{ asset('admin') }}/assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="{{ asset('admin') }}/assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="{{ asset('admin') }}/assets/css/custom.css" rel="stylesheet" />
+    <!-- GOOGLE FONTS-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <SCRIPT language="JavaScript" type="text/javascript">
+        function openWin( windowURL, windowName, windowFeatures ) { window.open( windowURL, windowName, windowFeatures ); }
+    </SCRIPT>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+    <!-- JQUERY SCRIPTS -->
+    <script src="{{ asset('admin') }}/assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="{{ asset('admin') }}/assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="{{ asset('admin') }}/assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="{{ asset('admin') }}/assets/js/custom.js"></script>
+
+
+</head>
+<body>
+<div id="wrapper">
+    <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.html">Elektronik AVM </a>
+        </div>
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+
+
+
+        <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"> {{ app.user.name }} &nbsp; <a href="{{ path('app_logout') }}" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+        {% else %}
+            Giriş Yapılmadı.
+        {% endif %}
+    </nav>
+    <!-- /. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li class="text-center">
+                    <img src="{{ asset('admin') }}/assets/img/find_user.png" class="user-image img-responsive"/>
+                </li>
+
+
+                <li>
+                    <a  href="{{ url('admin') }}"><i class="fa fa-desktop fa-3x"></i> Anamenü</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-sitemap fa-3x"></i> Siparişler<span class="fa arrow"></span></a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a href="{{ path('admin_orders_index',{ 'slug':'new' }) }}">Yeni Siparişler</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_orders_index',{ 'slug':'accepted' }) }}">Onaylanan Siparişler</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_orders_index',{ 'slug':'cancelled' }) }}">İptal Edilen Siparişler</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_orders_index',{ 'slug':'inshipping' }) }}">Kargodaki Siparişler</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('admin_orders_index',{ 'slug':'completed' }) }}">Tamamlanan Siparişler</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a  href="{{ url('admin') }}/product"><i class="fa fa-qrcode fa-3x"></i> Ürünler</a>
+                </li>
+                <li  >
+                    <a  href="{{ url('admin') }}/category"><i class="fa fa-table fa-3x"></i> Kategoriler</a>
+                </li>
+                <li  >
+                    <a  href="{{ url('admin') }}/user"><i class="fa fa-square-o fa-3x"></i> Üyeler </a>
+                </li>
+                <li  >
+                    <a  href="{{ url('admin') }}/messages2"><i class="fa fa-square-o fa-3x"></i> Üye Mesajları</a>
+                </li>
+                <li  >
+                    <a  href="{{ url('admin') }}/setting"><i class="fa fa-edit fa-3x"></i> Ayarlar </a>
+                </li>
+
+
+            </ul>
+
+        </div>
+
+    </nav>
+    <!-- /. NAV SIDE  -->
+    <div id="page-wrapper" >
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Elektronik AVM </h2>
+                    <h4>Sayın <b> {{ app.user.name }} </b> , Hoşgeldiniz. </h4> <br><br>
+                    {% block content %} {% endblock %}
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <hr />
+
+        </div>
+
+
+
+
+        {% block javascripts %} {% endblock %}

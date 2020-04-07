@@ -1,0 +1,66 @@
+{{ include('admin/messages.html.twig') }}
+<form role="form" name="order" action="{{ path('orders_new') }}" method="post">
+
+
+    <div class="form-group">
+        <label>Ödenecek Tutar ₺</label>
+        <input type="text" name="orders[amount]" value="{{ total }}" class="form-control"
+               placeholder="Ödenecek Tutar"/>
+    </div>
+    <br> <hr>
+    <h3>Kargo Alıcı Bilgileri</h3>
+    <div class="form-group">
+        <label>Ad Soyad</label>
+        <input type="text" name="orders[name]" value="{{ app.user.name }}" class="form-control"
+               placeholder="Ad Soyad"/>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Adres</label>
+        <input type="text" name="orders[address]" value="{{ app.user.address }}" class="form-control"
+               placeholder="Adres"/>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Şehir</label>
+        <input type="text" name="orders[city]" value="{{ app.user.city }}" class="form-control"
+               placeholder="Şehir"/>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Telefon</label>
+        <input type="text" name="orders[phone]" value="{{ app.user.phone }}" class="form-control"
+               placeholder="Telefon"/>
+    </div>
+    <br> <hr>
+    <h3>Kredi Kartı Bilgileri</h3>
+    <div class="form-group">
+        <label>Adı Soyadı</label>
+        <input type="text" name="cardholdername"  class="form-control"
+               placeholder="Adı Soyadı"/>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Kart Numarası</label>
+        <input type="text" name="cardnumber"  class="form-control"
+               placeholder="Kart Numarası"/>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Son Kullanma Tarihi</label>
+        <input type="text" name="cardvaliddates"  class="form-control"
+               placeholder="AY/YIL"/>
+    </div>
+    <br>
+    <div class="form-group">
+        <label>Güvenlik Kodu</label>
+        <input type="number" name="cardsecuritycode"  class="form-control"
+               placeholder="Güvenlik Kodu"/>
+    </div>
+    <br>
+
+    <input type="hidden" name="token" value="{{ csrf_token('form-order') }}" />
+    <button type="submit" class="btn btn-success btn-lg">SATIN AL</button>
+
+
+</form>

@@ -1,0 +1,62 @@
+{% extends 'frontbase.html.twig' %}
+
+
+{% block title %} Siparişlerim {% endblock %}
+
+{% block content %}
+
+
+
+<section class="main-content">
+    <div class="row">
+        <div class="span9">
+            <h4>Siparişlerim</h4>
+            {{ include('messages.html.twig') }}
+
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>İsim</th>
+                    <th>Tutar</th>
+                    <th>Şehir</th>
+                    <th>Telefon</th>
+                    <th>Tarih</th>
+                    <th>Durum</th>
+                    <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for order in orders %}
+            <tr>
+
+                <td>{{ order.name }}</td>
+                <td>{{ order.amount }} ₺</td>
+                <td>{{ order.city }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.createdAt ? order.createdAt|date('d-m-Y ') : '' }}</td>
+                <td>{{ order.status }}</td>
+                <td>
+                    <a href="{{ path('orders_show', {'id': order.id}) }}" class="btn btn-success btn-sm">Göster</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">Kayıt Bulunamadı.</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="{{ asset('assets') }}/js/common.js"></script>
+
+</section>
+
+{% endblock %}

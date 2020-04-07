@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ayarlar Düzenle{% endblock %}
+
+{% block body %}
+
+
+    {{ include('admin/setting/_form.html.twig') }}
+
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#detail' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#contact' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#referances' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
+{% endblock %}

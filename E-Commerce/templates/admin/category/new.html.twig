@@ -1,0 +1,46 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Kategori Ekle{% endblock %}
+
+{% block content %}
+
+<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+    <div class="row"><div class="col-sm-6">
+            <div class="dataTables_length" id="dataTables-example_length">
+                <label><select name="dataTables-example_length" aria-controls="dataTables-example" class="form-control input-sm">
+                        <option value="10">10</option>
+                        <option value="25">25</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select> records per page</label>
+
+            </div>
+
+        </div><div class="col-sm-6">
+            <div id="dataTables-example_filter" class="dataTables_filter">
+                <label>Search:<input type="search" class="form-control input-sm" aria-controls="dataTables-example"></label>
+            </div></div></div>
+    <h1>Yeni Kategori Ekle</h1>
+
+    {{ include('admin/category/_form.html.twig') }}
+
+    <a href="{{ path('admin_category_index') }}" class="btn btn-primary">back to list</a>
+</div>
+    <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="admin/assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="admin/assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="admin/assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="admin/assets/js/custom.js"></script>
+
+    </body>
+    </html>
+{% endblock %}
+

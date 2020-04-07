@@ -1,0 +1,33 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Yeni Ürün Ekle{% endblock %}
+
+{% block content %}
+
+<div id="dataTables-example_wrapper" class="dataTables_wrapper form-inline" role="grid">
+
+
+
+    {{ include('admin/category/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('admin_category_index') }}" class="btn btn-primary">Listeye Geri Dön</a>
+
+    {{ include('admin/category/_delete_form.html.twig') }}
+</div>
+    <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="admin/assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="admin/assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="admin/assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="admin/assets/js/custom.js"></script>
+
+    </body>
+    </html>
+{% endblock %}
+

@@ -1,0 +1,113 @@
+{% extends 'adminbase.html.twig' %}
+
+{% block title %}Ürün Düzenle{% endblock %}
+
+{% block content %}
+
+
+
+    <div class="panel panel-default">
+    <div class="panel-heading">
+        Ürün Ekle
+    </div>
+    <div class="panel-body">
+    <div class="row">
+    <div class="col-md-6">
+    {{ include('admin/messages.html.twig') }}
+    <form role="form" method="post">
+
+        <div class="form-group">
+            <label>Kategorisi</label>
+            <select name="product[category_id]" class="form-control">
+
+
+                    {% if (catname) %}
+                        <option value="{{ product.categoryid }}">{{ catname[0].title }}</option>
+                    {% endif %}
+
+
+                {% for cat in catlist %}
+                    <option value="{{ cat.id }}">{{ cat.title }}</option>
+                {% endfor %}
+
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Ürün Adı</label>
+            <input type="text" name="product[title]" value="{{ product.title }}" class="form-control"
+                   placeholder="Ürün Adı"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Anahtar Kelimeler</label>
+            <input type="text" name="product[keywords]" value="{{ product.keywords }}" class="form-control"
+                   placeholder="Anahtar Kelimeler"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Kısa Açıklama</label>
+            <input type="text" name="product[description]" value="{{ product.description }}" class="form-control"
+                   placeholder="Kısa Açıklama"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Alış Fiyatı</label>
+            <input type="text" name="product[price]" value="{{ product.price }}" class="form-control"
+                   placeholder="Alış Fİyatı"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Satış Fiyatı</label>
+            <input type="text" name="product[sprice]" value="{{ product.sprice }}" class="form-control"
+                   placeholder="Satış Fiyatı"/>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Miktar</label>
+            <input type="text" name="product[amount]" value="{{ product.amount }}" class="form-control"
+                   placeholder="Miktar"/>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label>Aktif Durumu</label>
+            <select name="product[status]" class="form-control">
+                <option>{{ product.status }}</option>
+                <option>True</option>
+                <option>False</option>
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <label>Detay</label>
+            <textarea id="detail" name="product[detail]" rows="10" cols="100">{{ product.detail }}</textarea>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success btn-lg">Kaydet</button>
+
+
+    </form>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#detail' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+        </script>
+        <!-- /. PAGE WRAPPER  -->
+    </div>
+    <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="admin/assets/js/jquery-1.10.2.js"></script>
+    <!-- BOOTSTRAP SCRIPTS -->
+    <script src="admin/assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="admin/assets/js/jquery.metisMenu.js"></script>
+    <!-- CUSTOM SCRIPTS -->
+    <script src="admin/assets/js/custom.js"></script>
+
+    </body>
+    </html>
+{% endblock %}
